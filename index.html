@@ -18,75 +18,53 @@
       height: 100vh;
       margin: 0;
       text-align: center;
+      flex-direction: column;
       padding: 10px;
       overflow: hidden;
       position: relative;
     }
 
-    #bookContainer {
+    h1, p {
       display: none;
-      position: absolute;
-      width: 80%;
-      height: 80%;
-      background-color: #ffe6f2;
-      border-radius: 20px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-      display: flex;
-      justify-content: space-between;
-      padding: 20px;
-      overflow: hidden;
-      animation: openBook 0.5s forwards;
+      opacity: 0;
     }
 
-    #bookContent {
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      overflow-y: auto;
-      padding: 10px;
-      text-align: center;
-    }
-
-    #bookContainer img {
-      max-width: 100%;
-      max-height: 60%;
-      border-radius: 15px;
-      margin-bottom: 15px;
-      box-shadow: 0 0 10px #ff99cc;
-    }
-
-    .book-page {
-      flex: 1;
-      width: 45%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      text-align: center;
+    h1 {
       font-family: 'Dancing Script', cursive;
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      color: #ff3385;
+      text-shadow: 0 0 10px rgba(255, 51, 133, 0.8), 0 0 20px rgba(255, 51, 133, 0.6);
+      animation: slideIn 2s forwards;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    p {
+      font-family: 'Open Sans', sans-serif;
       font-size: 1.5rem;
+      margin-top: 1rem;
       color: #ff66b2;
-      text-shadow: 0 0 5px #ff66b2;
+      text-shadow: 0 0 10px rgba(255, 51, 133, 0.8), 0 0 20px rgba(255, 51, 133, 0.6);
+      animation: fadeIn 2s 2s forwards;
     }
 
-    #closeBook {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      background-color: #ff3385;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
-      cursor: pointer;
-      box-shadow: 0 0 10px #ff99cc;
-    }
-
-    #closeBook:hover {
-      background-color: #ff66b2;
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
     #startButton {
@@ -99,6 +77,7 @@
       cursor: pointer;
       transition: all 0.3s ease;
       text-shadow: 0 0 10px rgba(255, 51, 133, 0.8), 0 0 20px rgba(255, 51, 133, 0.6);
+      animation: glowing 1.5s infinite alternate;
     }
 
     #startButton:hover {
@@ -107,47 +86,231 @@
       text-shadow: 0 0 15px rgba(255, 51, 133, 1), 0 0 30px rgba(255, 51, 133, 1);
     }
 
-    @keyframes openBook {
+    @keyframes glowing {
+      0% {
+        text-shadow: 0 0 5px #ff66b2, 0 0 10px #ff66b2, 0 0 15px #ff66b2;
+      }
+      100% {
+        text-shadow: 0 0 15px #ff3385, 0 0 30px #ff3385, 0 0 45px #ff3385;
+      }
+    }
+
+    .heart {
+      position: absolute;
+      color: #ff3385;
+      font-size: 3rem;
+      animation: floatHearts 4s infinite;
+    }
+
+    @keyframes floatHearts {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-100vh) rotate(720deg);
+      }
+    }
+
+    .forever-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.5rem;
+      margin-top: 1rem;
+      color: #ff3385;
+      text-shadow: 0 0 10px rgba(255, 51, 133, 0.8), 0 0 20px rgba(255, 51, 133, 0.6);
+      animation: fadeInForever 2s 3s forwards;
+    }
+
+    @keyframes fadeInForever {
       from {
-        transform: scale(0.5);
         opacity: 0;
       }
       to {
-        transform: scale(1);
         opacity: 1;
+      }
+    }
+
+    .timer-text {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1.2rem;
+      margin-top: 20px;
+      color: #ff66b2;
+      text-shadow: 0 0 10px rgba(255, 51, 133, 0.8), 0 0 20px rgba(255, 51, 133, 0.6);
+    }
+
+    #gallery {
+      display: none;
+      position: fixed;
+      background: rgba(0, 0, 0, 0.8);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .gallery-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: scale(0);
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-image {
+      max-width: 80%;
+      margin: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px gray;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: rgba(255, 51, 133, 1);
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+
+    .slide {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      p {
+        font-size: 1.2rem;
+      }
+      #startButton {
+        font-size: 1.2rem;
+        padding: 8px 16px;
+      }
+      .gallery-image {
+        max-width: 90%;
       }
     }
   </style>
 </head>
 <body>
-  <button id="startButton">Open Love Note</button>
 
-  <div id="bookContainer">
-    <button id="closeBook">Close</button>
-    <div class="book-page">
-      <img src="https://via.placeholder.com/300x200.png?text=Picture+1" alt="Picture 1">
-      <p>Hii mommyyy :3, just want you to know you’re perfect and amazing exactly how you are. </p>
-    </div>
-    <div class="book-page">
-      <img src="https://via.placeholder.com/300x200.png?text=Picture+2" alt="Picture 2">
-      <p>I really love you and can’t wait for mommy cuddles when we meet. You’re stuck w me forever! :3</p>
+  <h1 id="noteHeader">Raf x Isa ❤️</h1>
+  <p id="loveNote">
+    Hii mommyyy :3, Just want you to know you’re perfect and amazing exactly how you are. Honestly, just u being u makes me the happiest person alive. I’m so grateful for everything you do. I really, really love you, and I can’t wait for mommy cuddles when we meet (even tho it felt like forever shh). I’m always gonna be here for you, waiting as long as it takes, and I’m never leaving. You’re stuck w me forever, okki mommy? :3<br><br>
+    I love you so much, mommy.
+  </p>
+
+  <button id="startButton" onclick="start()">Press me :3</button>
+  <button id="showGalleryButton" onclick="showGallery()">Show Photos</button>
+  <div class="forever-text">I+R Forever<3</div>
+  <div class="timer-text" id="timerText"></div>
+
+  <audio id="audioPlayer" loop>
+    <source src="./Just_the_way_you_are.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div id="gallery">
+    <div class="close-button" onclick="closeGallery()">✖</div>
+    <div class="gallery-content" id="galleryContent">
+      <div class="slideshow-container">
+        <div class="slide active">
+          <img src="./RARA33333.png" class="gallery-image" alt="Image 1">
+        </div>
+        <div class="slide">
+          <img src="./RobloxScreenShot20240907_152137939.png" class="gallery-image" alt="Image 2">
+        </div>
+        <div class="slide">
+          <img src="./RobloxScreenShot20240907_152145203.png" class="gallery-image" alt="Image 3">
+        </div>
+        <div class="slide">
+          <img src="./RobloxScreenShot20241013_234916399.png" class="gallery-image" alt="Image 4">
+        </div>
+      </div>
+      <button class="prev" onclick="changeSlide(-1)">❮</button>
+      <button class="next" onclick="changeSlide(1)">❯</button>
     </div>
   </div>
 
   <script>
-    const startButton = document.getElementById('startButton');
-    const bookContainer = document.getElementById('bookContainer');
-    const closeBook = document.getElementById('closeBook');
+    function start() {
+      document.getElementById('audioPlayer').play();
+      document.getElementById('noteHeader').style.display = 'block';
+      document.getElementById('loveNote').style.display = 'block';
+      document.getElementById('startButton').style.display = 'none';
 
-    startButton.addEventListener('click', () => {
-      bookContainer.style.display = 'flex';
-      startButton.style.display = 'none';
+      for (let i = 0; i < 5; i++) createHeart();
+      startTimer();
+    }
+
+    function createHeart() {
+      let heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+
+    const startDate = new Date('2024-08-07T00:00:00');
+    let timerInterval;
+
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        let now = new Date();
+        let timeDiff = Math.floor((now - startDate) / 1000);
+        let days = Math.floor(timeDiff / (60 * 60 * 24));
+        let hours = Math.floor((timeDiff % (60 * 60 * 24)) / (60 * 60));
+        let minutes = Math.floor((timeDiff % (60 * 60)) / 60);
+
+        document.getElementById('timerText').innerText = Time we've spent together: ${days} days ${hours} hours ${minutes} minutes;
+      }, 1000);
+    }
+
+    document.body.addEventListener('click', () => {
+      for (let i = 0; i < 3; i++) createHeart();
     });
 
-    closeBook.addEventListener('click', () => {
-      bookContainer.style.display = 'none';
-      startButton.style.display = 'block';
-    });
+    let slideIndex = 0;
+
+    function showGallery() {
+      const gallery = document.getElementById('gallery');
+      gallery.style.display = 'flex';
+      document.getElementById('galleryContent').style.transform = 'scale(1)';
+      showSlide(slideIndex);
+    }
+
+    function closeGallery() {
+      const gallery = document.getElementById('gallery');
+      gallery.style.display = 'none';
+      document.getElementById('galleryContent').style.transform = 'scale(0)';
+    }
+
+    function showSlide(n) {
+      let slides = document.getElementsByClassName("slide");
+      if (n >= slides.length) slideIndex = 0;
+      if (n < 0) slideIndex = slides.length - 1;
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slides[slideIndex].style.display = "block";
+    }
+
+    function changeSlide(n) {
+      slideIndex += n;
+      showSlide(slideIndex);
+    }
   </script>
 </body>
 </html>
