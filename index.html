@@ -9,7 +9,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: black;
+      background-image: url('RAA.png'); /* Path to your PNG image */
+      background-size: cover; /* Ensures the image covers the entire screen */
+      background-position: center center; /* Centers the image */
+      background-attachment: fixed; /* Keeps the image fixed during scrolling */
       color: #ff66b2;
       font-family: 'Open Sans', sans-serif;
       display: flex;
@@ -203,10 +206,6 @@
         document.getElementById('timerText').innerText = `Time we've spent together: ${days} days ${hours} hours ${minutes} minutes`;
       }, 1000);
     }
-
-    document.body.addEventListener('click', () => {
-      for (let i = 0; i < 3; i++) createHeart();
-    });
   </script>
 </body>
 </html>
