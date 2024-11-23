@@ -13,15 +13,13 @@
       color: #ff66b2;
       font-family: 'Open Sans', sans-serif;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       height: 100vh;
       margin: 0;
-      text-align: center;
-      flex-direction: column;
       padding: 10px;
       overflow: hidden;
-      position: relative;
     }
 
     h1, p {
@@ -67,92 +65,40 @@
       }
     }
 
-    #startButton {
-      background-color: transparent;
-      color: #ff66b2;
-      font-size: 1.5rem;
-      padding: 10px 20px;
-      border: 2px solid #ff66b2;
-      border-radius: 25px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 10px rgba(255, 51, 133, 0.8), 0 0 20px rgba(255, 51, 133, 0.6);
-      animation: glowing 1.5s infinite alternate;
-    }
-
-    #startButton:hover {
-      background-color: #ff66b2;
-      color: white;
-      text-shadow: 0 0 15px rgba(255, 51, 133, 1), 0 0 30px rgba(255, 51, 133, 1);
-    }
-
-    @keyframes glowing {
-      0% {
-        text-shadow: 0 0 5px #ff66b2, 0 0 10px #ff66b2, 0 0 15px #ff66b2;
-      }
-      100% {
-        text-shadow: 0 0 15px #ff3385, 0 0 30px #ff3385, 0 0 45px #ff3385;
-      }
-    }
-
-    .heart {
-      position: absolute;
-      color: #ff3385;
-      font-size: 3rem;
-      animation: floatHearts 4s infinite;
-    }
-
-    @keyframes floatHearts {
-      0% {
-        transform: translateY(0) rotate(0deg);
-      }
-      100% {
-        transform: translateY(-100vh) rotate(720deg);
-      }
-    }
-
-    .forever-text {
-      font-family: 'Dancing Script', cursive;
-      font-size: 2.5rem;
-      margin-top: 1rem;
-      color: #ff3385;
-      text-shadow: 0 0 10px rgba(255, 51, 133, 0.8), 0 0 20px rgba(255, 51, 133, 0.6);
-      animation: fadeInForever 2s 3s forwards;
-    }
-
-    @keyframes fadeInForever {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    .timer-text {
-      font-family: 'Open Sans', sans-serif;
-      font-size: 1.2rem;
+    .gallery-container {
+      background-color: #ffccf2;
+      border: 5px solid #ff66b2;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255, 51, 133, 0.8), 0 0 30px rgba(255, 51, 133, 0.6);
       margin-top: 20px;
-      color: #ff66b2;
-      text-shadow: 0 0 10px rgba(255, 51, 133, 0.8), 0 0 20px rgba(255, 51, 133, 0.6);
+      text-align: center;
+      max-width: 90%;
+      height: 70vh;
+      overflow-y: scroll;
     }
 
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2.5rem;
-      }
-      p {
-        font-size: 1.2rem;
-      }
-      #startButton {
-        font-size: 1.2rem;
-        padding: 8px 16px;
-      }
+    .gallery-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      color: #ff3385;
+      margin-bottom: 10px;
+    }
+
+    .image-container {
+      margin-bottom: 15px;
+    }
+
+    .image-container img {
+      border-radius: 15px;
+      max-width: 100%;
+      max-height: 50vh;
+      box-shadow: 0 0 10px rgba(255, 102, 178, 0.8);
     }
   </style>
 </head>
 <body>
-
+  <!-- Original Love Note Section -->
   <h1 id="noteHeader">Raf x Isa ❤️</h1>
   <p id="loveNote">
     Hii mommyyy :3, Just want you to know you’re perfect and amazing exactly how you are. Honestly, just u being u makes me the happiest person alive. I’m so grateful for everything you do. I really, really love you, and I can’t wait for mommy cuddles when we meet (even tho it felt like forever shh). I’m always gonna be here for you, waiting as long as it takes, and I’m never leaving. You’re stuck w me forever, okki mommy? :3<br><br>
@@ -160,9 +106,25 @@
   </p>
 
   <button id="startButton" onclick="start()">Press me :3</button>
-  <div class="forever-text">I+R Forever<3</div>
-  <div class="timer-text" id="timerText"></div>
 
+  <!-- New Gallery Section -->
+  <div class="gallery-container">
+    <div class="gallery-title">Our Memories 📸</div>
+    <div class="image-container">
+      <img src="./RobloxScreenShot20240907_152137939.png" alt="Screenshot 1">
+    </div>
+    <div class="image-container">
+      <img src="./RobloxScreenShot20240907_152145203.png" alt="Screenshot 2">
+    </div>
+    <div class="image-container">
+      <img src="./RobloxScreenShot20241013_234916399.png" alt="Screenshot 3">
+    </div>
+    <div class="image-container">
+      <img src="./RARA33333.png" alt="Special Moment">
+    </div>
+  </div>
+
+  <!-- Background Music -->
   <audio id="audioPlayer" loop>
     <source src="./Just_the_way_you_are.mp3" type="audio/mp3">
     Your browser does not support the audio element.
@@ -174,39 +136,7 @@
       document.getElementById('noteHeader').style.display = 'block';
       document.getElementById('loveNote').style.display = 'block';
       document.getElementById('startButton').style.display = 'none';
-
-      for (let i = 0; i < 5; i++) createHeart();
-      startTimer();
     }
-
-    function createHeart() {
-      let heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.innerHTML = '❤️';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 5000);
-    }
-
-    const startDate = new Date('2024-08-07T00:00:00');
-    let timerInterval;
-
-    function startTimer() {
-      timerInterval = setInterval(() => {
-        let now = new Date();
-        let timeDiff = Math.floor((now - startDate) / 1000);
-        let days = Math.floor(timeDiff / (60 * 60 * 24));
-        let hours = Math.floor((timeDiff % (60 * 60 * 24)) / (60 * 60));
-        let minutes = Math.floor((timeDiff % (60 * 60)) / 60);
-
-        document.getElementById('timerText').innerText = `Time we've spent together: ${days} days ${hours} hours ${minutes} minutes`;
-      }, 1000);
-    }
-
-    document.body.addEventListener('click', () => {
-      for (let i = 0; i < 3; i++) createHeart();
-    });
   </script>
 </body>
 </html>
