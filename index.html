@@ -38,6 +38,15 @@
       animation: slideIn 2s forwards;
     }
 
+    img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 10px auto;
+      box-shadow: 0 0 15px rgba(255, 51, 133, 0.8);
+      animation: fadeIn 2s 1s forwards;
+    }
+
     @keyframes slideIn {
       from {
         transform: translateX(-100%);
@@ -95,22 +104,6 @@
       }
     }
 
-    .heart {
-      position: absolute;
-      color: #ff3385;
-      font-size: 3rem;
-      animation: floatHearts 4s infinite;
-    }
-
-    @keyframes floatHearts {
-      0% {
-        transform: translateY(0) rotate(0deg);
-      }
-      100% {
-        transform: translateY(-100vh) rotate(720deg);
-      }
-    }
-
     .forever-text {
       font-family: 'Dancing Script', cursive;
       font-size: 2.5rem;
@@ -129,26 +122,6 @@
       }
     }
 
-    .timer-text {
-      font-family: 'Open Sans', sans-serif;
-      font-size: 1.2rem;
-      margin-top: 20px;
-      color: #ff66b2;
-      text-shadow: 0 0 10px rgba(255, 51, 133, 0.8), 0 0 20px rgba(255, 51, 133, 0.6);
-    }
-
-    .corner-img {
-      position: absolute;
-      width: 100px;
-      height: auto;
-      z-index: 1;
-    }
-
-    .top-left { top: 10px; left: 10px; }
-    .top-right { top: 10px; right: 10px; }
-    .bottom-left { bottom: 10px; left: 10px; }
-    .bottom-right { bottom: 10px; right: 10px; }
-
     @media (max-width: 600px) {
       h1 {
         font-size: 2.5rem;
@@ -160,30 +133,25 @@
         font-size: 1.2rem;
         padding: 8px 16px;
       }
-      .corner-img {
-        width: 70px;
-      }
     }
   </style>
 </head>
 <body>
+
   <h1 id="noteHeader">Raf x Isa ❤️</h1>
+  <img src="RARA33333.png" alt="Love Image">
   <p id="loveNote">
-    Hii mommyyy :3, Just want you to know you’re perfect and amazing exactly how you are...
+    Hii mommyyy :3, Just want you to know you’re perfect and amazing exactly how you are. Honestly, just u being u makes me the happiest person alive. I’m so grateful for everything you do. I really, really love you, and I can’t wait for mommy cuddles when we meet (even tho it felt like forever shh). I’m always gonna be here for you, waiting as long as it takes, and I’m never leaving. You’re stuck w me forever, okki mommy? :3<br><br>
+    I love you so much, mommy.
   </p>
+
   <button id="startButton" onclick="start()">Press me :3</button>
   <div class="forever-text">I+R Forever<3</div>
-  <div class="timer-text" id="timerText"></div>
+
   <audio id="audioPlayer" loop>
     <source src="./Just_the_way_you_are.mp3" type="audio/mp3">
     Your browser does not support the audio element.
   </audio>
-
-  <!-- Images in corners -->
-  <img src="RARA33333.png" class="corner-img top-left">
-  <img src="RobloxScreenShot20240907_152137939.png" class="corner-img top-right">
-  <img src="RobloxScreenShot20240907_152145203.png" class="corner-img bottom-left">
-  <img src="RobloxScreenShot20241013_234916399.png" class="corner-img bottom-right">
 
   <script>
     function start() {
@@ -191,38 +159,6 @@
       document.getElementById('noteHeader').style.display = 'block';
       document.getElementById('loveNote').style.display = 'block';
       document.getElementById('startButton').style.display = 'none';
-
-      for (let i = 0; i < 5; i++) createHeart();
-      startTimer();
-    }
-
-    function createHeart() {
-      let heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.innerHTML = '❤️';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 5000);
-    }
-
-    const startDate = new Date('2024-08-07T00:00:00');
-    let timerInterval;
-
-    function startTimer() {
-      timerInterval = setInterval(() => {
-        let now = new Date();
-        let timeDiff = Math.floor((now - startDate) / 1000);
-        let days = Math.floor(timeDiff / (60 * 60 * 24));
-        let hours = Math.floor((timeDiff % (60 * 60 * 24)) / (60 * 60));
-        let minutes = Math.floor((timeDiff % (60 * 60)) / 60);
-
-        document.getElementById('timerText').innerText = `Time we've spent together: ${days} days ${hours} hours ${minutes} minutes`;
-      }, 1000);
-    }
-
-    function stopTimer() {
-      clearInterval(timerInterval);
     }
   </script>
 </body>
