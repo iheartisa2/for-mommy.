@@ -137,53 +137,17 @@
       text-shadow: 0 0 10px rgba(255, 51, 133, 0.8), 0 0 20px rgba(255, 51, 133, 0.6);
     }
 
-    #gallery {
-      display: none;
-      position: fixed;
-      background: rgba(0, 0, 0, 0.8);
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .gallery-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transform: scale(0);
-      transition: transform 0.5s ease;
-    }
-
-    .gallery-image {
-      max-width: 80%;
-      margin: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px gray;
-    }
-
-    .close-button {
+    .corner-img {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      background-color: rgba(255, 51, 133, 1);
-      color: white;
-      padding: 10px;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.5rem;
+      width: 100px;
+      height: auto;
+      z-index: 1;
     }
 
-    .slide {
-      display: none;
-    }
-
-    .active {
-      display: block;
-    }
+    .top-left { top: 10px; left: 10px; }
+    .top-right { top: 10px; right: 10px; }
+    .bottom-left { bottom: 10px; left: 10px; }
+    .bottom-right { bottom: 10px; right: 10px; }
 
     @media (max-width: 600px) {
       h1 {
@@ -196,51 +160,30 @@
         font-size: 1.2rem;
         padding: 8px 16px;
       }
-      .gallery-image {
-        max-width: 90%;
+      .corner-img {
+        width: 70px;
       }
     }
   </style>
 </head>
 <body>
-
   <h1 id="noteHeader">Raf x Isa ❤️</h1>
   <p id="loveNote">
-    Hii mommyyy :3, Just want you to know you’re perfect and amazing exactly how you are. Honestly, just u being u makes me the happiest person alive. I’m so grateful for everything you do. I really, really love you, and I can’t wait for mommy cuddles when we meet (even tho it felt like forever shh). I’m always gonna be here for you, waiting as long as it takes, and I’m never leaving. You’re stuck w me forever, okki mommy? :3<br><br>
-    I love you so much, mommy.
+    Hii mommyyy :3, Just want you to know you’re perfect and amazing exactly how you are...
   </p>
-
   <button id="startButton" onclick="start()">Press me :3</button>
-  <button id="showGalleryButton" onclick="showGallery()">Show Photos</button>
   <div class="forever-text">I+R Forever<3</div>
   <div class="timer-text" id="timerText"></div>
-
   <audio id="audioPlayer" loop>
     <source src="./Just_the_way_you_are.mp3" type="audio/mp3">
     Your browser does not support the audio element.
   </audio>
 
-  <div id="gallery">
-    <div class="close-button" onclick="closeGallery()">✖</div>
-    <div class="gallery-content" id="galleryContent">
-      <div class="slideshow-container">
-        <div class="slide active">
-          <img src="./RARA33333.png" class="gallery-image" alt="Image 1">
-        </div>
-        <div class="slide">
-          <img src="./RobloxScreenShot20240907_152137939.png" class="gallery-image" alt="Image 2">
-        </div>
-        <div class="slide">
-          <img src="./RobloxScreenShot20240907_152145203.png" class="gallery-image" alt="Image 3">
-        </div>
-        <div class="slide">
-          <img src="./RobloxScreenShot20241013_234916399.png" class="gallery-image" alt="Image 4">
-        </div>
-      </div>
-      <button class="prev" onclick="changeSlide(-1)">❮</button>
-      <button class="next" onclick="changeSlide(1)">❯</button>
-    </div>
-  </div>
+  <!-- Images in corners -->
+  <img src="RARA33333.png" class="corner-img top-left">
+  <img src="RobloxScreenShot20240907_152137939.png" class="corner-img top-right">
+  <img src="RobloxScreenShot20240907_152145203.png" class="corner-img bottom-left">
+  <img src="RobloxScreenShot20241013_234916399.png" class="corner-img bottom-right">
 
   <script>
     function start() {
@@ -274,42 +217,12 @@
         let hours = Math.floor((timeDiff % (60 * 60 * 24)) / (60 * 60));
         let minutes = Math.floor((timeDiff % (60 * 60)) / 60);
 
-        document.getElementById('timerText').innerText = Time we've spent together: ${days} days ${hours} hours ${minutes} minutes;
+        document.getElementById('timerText').innerText = `Time we've spent together: ${days} days ${hours} hours ${minutes} minutes`;
       }, 1000);
     }
 
-    document.body.addEventListener('click', () => {
-      for (let i = 0; i < 3; i++) createHeart();
-    });
-
-    let slideIndex = 0;
-
-    function showGallery() {
-      const gallery = document.getElementById('gallery');
-      gallery.style.display = 'flex';
-      document.getElementById('galleryContent').style.transform = 'scale(1)';
-      showSlide(slideIndex);
-    }
-
-    function closeGallery() {
-      const gallery = document.getElementById('gallery');
-      gallery.style.display = 'none';
-      document.getElementById('galleryContent').style.transform = 'scale(0)';
-    }
-
-    function showSlide(n) {
-      let slides = document.getElementsByClassName("slide");
-      if (n >= slides.length) slideIndex = 0;
-      if (n < 0) slideIndex = slides.length - 1;
-      for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-      }
-      slides[slideIndex].style.display = "block";
-    }
-
-    function changeSlide(n) {
-      slideIndex += n;
-      showSlide(slideIndex);
+    function stopTimer() {
+      clearInterval(timerInterval);
     }
   </script>
 </body>
